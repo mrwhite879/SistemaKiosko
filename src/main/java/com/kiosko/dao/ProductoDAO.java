@@ -9,7 +9,6 @@ import java.util.List;
 
 public interface ProductoDAO {
     void insertar(Producto producto);
-
-
+    Producto buscarPorCodigoBarra(String codigo_barra);
 }
 
