@@ -2,10 +2,8 @@ package com.kiosko.dao;
 
 import com.kiosko.model.Producto;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 
 public class ProductoDAOImpl implements ProductoDAO {
     @Override
@@ -44,7 +42,7 @@ public class ProductoDAOImpl implements ProductoDAO {
                     String presentacion = rs.getString("presentacion");
                     double precio = rs.getDouble("precio");
 
-                    return new Producto(id, nombre, codigo_barra, presentacion, precio);
+                    return new Producto(id, nombre, codigo_barraDB, presentacion, precio);
                 }
 
             }
@@ -53,5 +51,54 @@ public class ProductoDAOImpl implements ProductoDAO {
             System.out.println("Error al buscar producto por codigo de barras " + e.getMessage());
         }
         return null;
+    }
+
+    @Override
+    public ArrayList<Producto> listarTodos() {
+        ArrayList<Producto> listaProductos = new ArrayList<>();
+
+        String sql = "SELECT id, nombre, codigo_barra, presentacion, precio FROM producto";
+
+        try (Connection conn = DatabaseConnection.conectar();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String nombre = rs.getString("nombre");
+                String codigo_barra = rs.getString("codigo_barra");
+                String presentacion = rs.getString("presentacion");
+                double precio = rs.getDouble("precio");
+
+                Producto p = new Producto(id,nombre,codigo_barra,presentacion,precio);
+
+                listaProductos.add(p);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al listar los productos: " + e.getMessage());
+        }
+        return listaProductos;
+    }
+
+    @Override
+    public void actualizarPrecio(String codigo_barra, double nuevoPrecio) {
+        String sql = "UPDATE producto SET precio = ? WHERE codigo_barra = ?";
+
+        try (Connection conn = DatabaseConnection.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setDouble(1, nuevoPrecio);
+            stmt.setString(2, codigo_barra);
+
+            int filasAfectadas = stmt.executeUpdate();
+
+            if (filasAfectadas > 0) {
+                System.out.println("Precio actualizado con éxito en la base de datos");
+
+            } else {
+                System.out.println("No se encontró ningún producto con ese código de barras");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al actualizar el precio: " + e.getMessage());
+        }
     }
 }

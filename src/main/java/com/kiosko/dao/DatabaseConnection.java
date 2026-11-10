@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DatabaseConnection {
-    private static final String URL = "jdbc:sqlite:kiosko.db";
+    private static final String URL = "jdbc:sqlite:kiosko.db?busy_timeout=3000";
 
     public static Connection conectar() throws SQLException {
         Connection conn = DriverManager.getConnection(URL);

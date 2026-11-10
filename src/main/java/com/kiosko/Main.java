@@ -6,6 +6,7 @@ import com.kiosko.dao.ProductoDAO;
 import com.kiosko.dao.ProductoDAOImpl;
 import com.kiosko.model.Producto;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -32,9 +33,20 @@ public class Main {
         } else {
             System.out.println("Nombre: " + producto.getNombre() + " Precio: " + producto.getPrecio());
         }
-        teclado.close();
 
 
+        ArrayList<Producto> prod = objeto.listarTodos();
+
+        for (Producto elemento : prod) {
+            System.out.println("Nombre: " + elemento.getNombre() + " Precio: " + elemento.getPrecio() + " presentacion: " + elemento.getPresentacion());
+        }
+
+        System.out.println("Ingrese el codigo de barra para actualizar precio:");
+        String cod = teclado.nextLine();
+        System.out.println("Ingrese el nuevo precio");
+        double nuev = teclado.nextDouble();
+
+        objeto.actualizarPrecio(cod, nuev);
     }
 
 }
