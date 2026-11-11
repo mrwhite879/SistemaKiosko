@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class ProductoDAOImpl implements ProductoDAO {
     @Override
-    public void insertar(Producto producto) {
+    public  void insertar(Producto producto) {
         String sql = "INSERT INTO producto (nombre, codigo_barra, presentacion, precio ) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = DatabaseConnection.conectar();
