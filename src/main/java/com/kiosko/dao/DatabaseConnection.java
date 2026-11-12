@@ -65,7 +65,7 @@ public class DatabaseConnection {
 
     private static void crearTablaRetirosCaja(Connection conn) throws SQLException {
         String sql = "CREATE TABLE IF NOT EXISTS retiros_caja (" +
-                "id INTEGER PRIMARY AUTOINCREMENT, " +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "fecha_hora TEXT NOT NULL, " +
                 "monto REAL NOT NULL, " +
                 "responsable TEXT NOT NULL, " +

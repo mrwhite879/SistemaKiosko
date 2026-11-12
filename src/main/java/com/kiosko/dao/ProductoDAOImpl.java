@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class ProductoDAOImpl implements ProductoDAO {
     @Override
     public  void insertar(Producto producto) {
-        String sql = "INSERT INTO producto (nombre, codigo_barra, presentacion, precio ) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO productos (nombre, codigo_barra, presentacion, precio ) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = DatabaseConnection.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -27,7 +27,7 @@ public class ProductoDAOImpl implements ProductoDAO {
 
     @Override
     public Producto buscarPorCodigoBarra(String codigo_barra) {
-        String sql = "SELECT * FROM producto WHERE codigo_barra = ?"; //se crea la consulta para buscar el codigo de barra
+        String sql = "SELECT * FROM productos WHERE codigo_barra = ?"; //se crea la consulta para buscar el codigo de barra
 
         try (Connection conn = DatabaseConnection.conectar(); // nos conectamos a la base de datos
              PreparedStatement stmt = conn.prepareStatement(sql)) { //le mandamos la consulta al preparedstatement
@@ -57,7 +57,7 @@ public class ProductoDAOImpl implements ProductoDAO {
     public ArrayList<Producto> listarTodos() {
         ArrayList<Producto> listaProductos = new ArrayList<>();
 
-        String sql = "SELECT id, nombre, codigo_barra, presentacion, precio FROM producto";
+        String sql = "SELECT id, nombre, codigo_barra, presentacion, precio FROM productos";
 
         try (Connection conn = DatabaseConnection.conectar();
              Statement stmt = conn.createStatement();
@@ -82,7 +82,7 @@ public class ProductoDAOImpl implements ProductoDAO {
 
     @Override
     public void actualizarPrecio(String codigo_barra, double nuevoPrecio) {
-        String sql = "UPDATE producto SET precio = ? WHERE codigo_barra = ?";
+        String sql = "UPDATE productos SET precio = ? WHERE codigo_barra = ?";
 
         try (Connection conn = DatabaseConnection.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
