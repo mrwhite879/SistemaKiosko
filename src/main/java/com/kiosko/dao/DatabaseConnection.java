@@ -46,7 +46,8 @@ public class DatabaseConnection {
         String sql = "CREATE TABLE IF NOT EXISTS ventas (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "fecha_hora TEXT NOT NULL, " +
-                "medio_pago TEXT NOT NULL, " +
+                "monto_efectivo REAL NOT NULL, " +
+                "monto_transferencia REAL NOT NULL, "+
                 "total REAL NOT NULL)";
         executeSQL(conn, sql);
     }

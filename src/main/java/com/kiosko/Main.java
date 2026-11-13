@@ -1,18 +1,15 @@
 package com.kiosko;
 
 
-import com.kiosko.dao.DatabaseConnection;
-import com.kiosko.dao.ProductoDAO;
-import com.kiosko.dao.ProductoDAOImpl;
-import com.kiosko.model.Producto;
-
-import java.util.ArrayList;
-import java.util.Scanner;
+import com.kiosko.dao.*;
 
 public class Main {
     public static void main(String[] args) {
 
-        DatabaseConnection.inicializarBaseDeDatos();
-    }
 
+        DatabaseConnection.inicializarBaseDeDatos();
+        System.out.println("¡Base de datos lista para arrancar!");
+
+
+    }
 }

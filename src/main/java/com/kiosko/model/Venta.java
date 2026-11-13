@@ -3,16 +3,18 @@ package com.kiosko.model;
 public class Venta {
     private long id;
     private String fecha_hora;
-    private String medio_pago;
+    private double monto_efectivo;
+    private double monto_transferencia;
     private double total;
 
     public Venta() {
     }
 
-    public Venta(long id, String fecha_hora, String medio_pago, double total) {
+    public Venta(long id, String fecha_hora, double monto_efectivo, double monto_transferencia, double total) {
         this.id = id;
         this.fecha_hora = fecha_hora;
-        this.medio_pago = medio_pago;
+        this.monto_efectivo = monto_efectivo;
+        this.monto_transferencia = monto_transferencia;
         this.total = total;
     }
 
@@ -32,12 +34,20 @@ public class Venta {
         this.fecha_hora = fecha_hora;
     }
 
-    public String getMedio_pago() {
-        return medio_pago;
+    public double getMonto_efectivo() {
+        return monto_efectivo;
     }
 
-    public void setMedio_pago(String medio_pago) {
-        this.medio_pago = medio_pago;
+    public void setMonto_efectivo(double monto_efectivo) {
+        this.monto_efectivo = monto_efectivo;
+    }
+
+    public double getMonto_transferencia() {
+        return monto_transferencia;
+    }
+
+    public void setMonto_transferencia(double monto_transferencia) {
+        this.monto_transferencia = monto_transferencia;
     }
 
     public double getTotal() {

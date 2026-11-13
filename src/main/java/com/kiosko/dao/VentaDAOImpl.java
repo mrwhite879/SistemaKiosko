@@ -11,21 +11,22 @@ public class VentaDAOImpl implements VentaDAO {
     @Override
     public void registrarVenta(Venta venta, List<DetalleVenta> detalles) throws SQLException {
 
-        String sqlVenta = "INSERT INTO ventas (fecha_hora, medio_pago, total) VALUES (datetime('now', 'localtime'), ?, ?)";
+        String sqlVenta = "INSERT INTO ventas (fecha_hora, monto_efectivo, monto_transferencia, total) VALUES (datetime('now', 'localtime'), ?, ?, ?)";
         String sqlDetalle = "INSERT INTO detalle_ventas (cantidad, precio_unitario, producto_id, venta_id) VALUES (?, ?, ?, ?)";
+        Connection conn = null;
 
+        try  {
 
-        try (Connection conn = DatabaseConnection.conectar()) {
-
-
+            conn = DatabaseConnection.conectar();
             conn.setAutoCommit(false);
 
             long ventaId = -1;
 
 
             try (PreparedStatement stmtVenta = conn.prepareStatement(sqlVenta, Statement.RETURN_GENERATED_KEYS)) {
-                stmtVenta.setString(1, venta.getMedio_pago());
-                stmtVenta.setDouble(2, venta.getTotal());
+                stmtVenta.setDouble(1, venta.getMonto_efectivo());
+                stmtVenta.setDouble(2, venta.getMonto_transferencia());
+                stmtVenta.setDouble(3, venta.getTotal());
                 stmtVenta.executeUpdate();
 
 
@@ -57,8 +58,23 @@ public class VentaDAOImpl implements VentaDAO {
             conn.commit();
 
         } catch (SQLException e) {
+            if (conn != null) {
+                try {
+                    conn.rollback();
+                } catch (SQLException rollbackEx) {
+                    rollbackEx.printStackTrace();
+                }
+            }
 
             throw e;
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException closeEx) {
+                    closeEx.printStackTrace();
+                }
+            }
         }
     }
 }

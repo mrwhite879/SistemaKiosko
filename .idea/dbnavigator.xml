@@ -11,11 +11,11 @@
   </component>
   <component name="DBNavigator.Project.DatabaseAssistantManager">
     <assistants>
-      <assistant-state connection-id="571f38e5-6197-470e-a005-4f312b0fc7ae" assistant-type="PUBLIC" default-profile-name="" selected-chat-id="" availability="AVAILABLE" acknowledgement="NONE" selected="true">
+      <assistant-state connection-id="571f38e5-6197-470e-a005-4f312b0fc7ae" assistant-type="SELECT_AI" default-profile-name="" selected-chat-id="" availability="UNAVAILABLE" acknowledgement="NONE">
         <tools />
         <mcp-servers />
       </assistant-state>
-      <assistant-state connection-id="571f38e5-6197-470e-a005-4f312b0fc7ae" assistant-type="SELECT_AI" default-profile-name="" selected-chat-id="" availability="UNAVAILABLE" acknowledgement="NONE">
+      <assistant-state connection-id="571f38e5-6197-470e-a005-4f312b0fc7ae" assistant-type="PUBLIC" default-profile-name="" selected-chat-id="" availability="AVAILABLE" acknowledgement="NONE" selected="true">
         <tools />
         <mcp-servers />
       </assistant-state>
@@ -32,14 +32,19 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="571f38e5-6197-470e-a005-4f312b0fc7ae">
-      <console name="Connection 1" type="STANDARD" schema="kiosko" session="Main"><![CDATA[select * from detalle_ventas;]]></console>
+      <console name="Connection" type="STANDARD" schema="kiosko" session="Main" />
+      <console name="Connection 1" type="STANDARD" schema="kiosko" session="Main"><![CDATA[select * from ventas
+
+;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files />
+    <open-files>
+      <object connection-id="571f38e5-6197-470e-a005-4f312b0fc7ae" object-ref="consoles/Connection" />
+    </open-files>
   </component>
   <component name="DBNavigator.Project.DatabasePrerequisiteManager">
     <prerequisites />
